@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>axios</title>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+</head>
+<style>
+    .slides {
+        width: 300px;
+        background: red;
+        height: 100px;
+        transition: all 0.3s;
+    }
+    
+    .window {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+    
+    .active {
+        background: rebeccapurple;
+    }
+    
+    ol {
+        list-style: none;
+    }
+</style>
+
+<body>
+
+
+    <div id='app'>
+    </div>
+</body>
+
+<script>
+    let view = new Vue({
+        el: '#app',
+        data: {
+            selected: 0,
+            tabs: [{
+                name: 'a',
+                content: 'aaa'
+            }, {
+                name: 'b',
+                content: 'bbb'
+            }, {
+                name: 'c',
+                content: 'ccc'
+            }, ]
+
+        },
+        template: `
+        <div>
+            <ol>
+               <li v-for="tab in tabs" 
+               v-on:click="selected=tab.name"
+               v-bind:class="{active:tab.name===selected}"
+               >{{tab.name}}</li>
+           </ol>
+           <ol>
+                <li v-for="tab in tabs" 
+                v-show="selected===tab.name">{{tab.content}}</li>
+           </ol>
+        </div>
+        `,
+        methods: {
+            toggle() {
+                this.open = !this.open
+            },
+            go(index) {
+                this.transformValue = `translateX(${-100*index}px)`
+            }
+        }
+    })
+</script>
+
+</html>
